@@ -23,5 +23,16 @@ SOFTWARE.
 */
 
 angular.module('Ultify', [
-	'UltifySearch'
-]);
+	'ngRoute',
+	'UltifySearch',
+	'UltifyDetails'
+]).
+config(function ($routeProvider) {
+	$routeProvider.when('/', {
+			templateUrl: 'app/search/ultify_search.template.html'
+		}).when('/details/:type', {
+			templateUrl: 'app/details/ultify_details.template.html'
+		}).otherwise({
+			redirectTo: '/'
+		});
+});

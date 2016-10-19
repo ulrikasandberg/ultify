@@ -24,7 +24,7 @@ SOFTWARE.
 
 angular.
 module('UltifySearch').
-controller('UltifySearchController', function ($scope, $http, UrlManager) {
+controller('UltifySearchController', function ($scope, $http, UrlManager, $compile) {
 	$scope.query = '';
 	$scope.type = 'track';
 	
@@ -45,12 +45,14 @@ controller('UltifySearchController', function ($scope, $http, UrlManager) {
 				if(items) {
 					for(i = 0; i < items.length; i++) {
 						tmp = {};
+						tmp.id = items[i].id;
 						imgLen = items[i].album.images.length;
 						tmp.img = (imgLen > 0) ? items[i].album.images[imgLen - 1].url : '';
 						tmp.name = items[i].name;
 						tmp.col3 = items[i].album.name;
 						tmp.col4 = items[i].artists.map(function(a) { return a.name }).join(', ');
 						tmp.play = items[i].external_urls.spotify;
+						tmp.b64href = btoa(items[i].href);
 						resArray.push(tmp);
 					}
 				}
@@ -74,6 +76,7 @@ controller('UltifySearchController', function ($scope, $http, UrlManager) {
 						tmp.col3 = items[i].followers.total;
 						tmp.col4 = items[i].genres.join(', ');
 						tmp.play = items[i].external_urls.spotify;
+						tmp.b64href = btoa(items[i].href);
 						resArray.push(tmp);
 					}
 				}

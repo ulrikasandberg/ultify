@@ -1,5 +1,4 @@
-<!doctype html>
-<!--
+/**
 MIT License
 
 Copyright (c) 2016 Ulrika Sandberg
@@ -21,33 +20,40 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
--->
-<html ng-app="Ultify">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="author" content="Ulrika Sandberg">
-		<title>Ultify</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
-		<script src="app/app.js"></script>
-		<script src="app/util/url_manager.js"></script>
-		<script src="app/search/ultify_search.module.js"></script>
-		<script src="app/search/ultify_search.controller.js"></script>
-		<script src="app/details/ultify_details.module.js"></script>
-		<script src="app/details/ultify_details.controller.js"></script>
-		<link rel="stylesheet" type="text/css" href="app/app.css">
-	</head>
-	<body>
-		<div id="wrapper">
-			<div id="header">
-				<h1>Ultify</h1>
-			</div>
-			<div id="view-area" ng-view></div>
-		</div>
-		<footer>
-		&copy; Ulrika Sandberg
-		</footer>
-	</body>
-</html>
+*/
 
+angular.
+module('UltifyDetails').
+controller('UltifyDetailsController', function($scope, $http, $routeParams, $sce) {
+	 $scope.frameUrl = '';
+	 
+	 var showDetails = function(response) {
+	 	switch($routeParams.type) {
+			case 'track':
+				$scope.track = response.data;
+				$scope.duration = function(ms) {
+					var minutes = Math.floor(ms / 60000);
+					var seconds = ((ms % 60000) / 1000).toFixed(0);
+					return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+				}($scope.result.duration_ms);
+				break;
+			case 'artist':
+				$scope.artist = response.data;
+				break;
+			case 'album':
+				break;
+			case 'playlist':
+				break;
+			default:
+				break;
+		 }
+	 };
+	 
+	 $http.get(atob($routeParams.url)).then(showDetails);
+	 
+	 $scope.playPreview = function() {
+	 	angular.element(document.querySelector("#preview-frame")).removeClass("ul-hidden");
+	 	angular.element(document.querySelector("#preview-play")).addClass("ul-hidden");
+	 	$scope.frameUrl = $sce.trustAsResourceUrl($scope.result.preview_url);
+	 };
+});

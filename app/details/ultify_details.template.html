@@ -22,13 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <div id="details-view" ng-app="UltifyDetails" ng-controller="UltifyDetailsController">
+	<p><a href back-button>&lt;&lt; Tillbaka</a></p>
 	<!-- TRACK -->
 	<div ng-if="track">
 		<div class="details-image">
 			<img src="{{track.album.images[0].url}}" alt="">
 		</div>
 		<p class="details-explicit ul-uc" ng-if="track.explicit">Explicit</p>
-		<p class="details-title">{{track.name}}<p>
+		<p><span class="ul-uc">{{track.type}}</span><br><span class="details-title">{{track.name}}</span></p>
 		<p class="details-album"><span class="ul-uc">Album</span><br><a href="">{{track.album.name}}</a></p>
 		
 		<div class="details-artists"><span class="ul-uc">{{(track.artists.length > 1) ? 'Artister' : 'Artist'}}</span>
@@ -62,7 +63,8 @@ SOFTWARE.
 		<div class="details-image">
 			<img src="{{artist.images[0].url}}" alt="">
 		</div>
-		<p class="details-title">{{artist.name}}<p>
+		<p><span class="ul-uc">{{artist.type}}</span><br><span class="details-title">{{artist.name}}</span><p>
+		<p><a class="ul-uc" ng-href="{{artist.external_urls.spotify}}" target="_blank">Öppna hos Spotify &gt;&gt;</a></p>
 		<table>
 			<tr>
 				<td class="ul-uc">Följare</td><td>{{artist.followers.total}}</td>
@@ -73,11 +75,57 @@ SOFTWARE.
 			<tr>
 				<td class="ul-uc">Genrer</td>
 				<td>
-					<ul>
+					<ul class="genre-list">
 						<li ng-repeat="g in artist.genres">{{g}}</li>
 					</ul>
 				</td>
 			</tr>
 		</table>
-	<div>
+	</div>
+	<!-- ALBUM -->
+	<div ng-if="album">
+		<div class="details-image">
+			<img src="{{album.images[0].url}}" alt="">
+		</div>
+		<p><span class="ul-uc">{{album.album_type}}</span><br><span class="details-title">{{album.name}}</span><p>
+		<div class="details-artists"><span class="ul-uc">{{(album.artists.length > 1) ? 'Artister' : 'Artist'}}</span>
+			<ul>
+				<li ng-repeat="artist in album.artists"><a href="">{{artist.name}}</a></li>
+			</ul>
+		</div>
+		<p><a class="ul-uc" ng-href="{{album.external_urls.spotify}}" target="_blank">Öppna hos Spotify &gt;&gt;</a></p>
+		<table>
+			<tr>
+				<td class="ul-uc">Utgivningsdatum</td><td>{{album.release_date}}</td>
+			</tr>
+			<tr>
+				<td class="ul-uc">Utgivare</td><td>{{album.label}}</td>
+			</tr>
+			<tr>
+				<td class="ul-uc">Populäritet</td><td>{{album.popularity}}</td>
+			</tr>
+			<tr ng-if="album.genres.length > 0">
+				<td class="ul-uc">Genrer</td>
+				<td>
+					<ul class="genre-list">
+						<li ng-repeat="g in album.genres">{{g}}</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="ul-uc">Copyrights</td>
+				<td>
+					<ul class="genre-list">
+						<li ng-repeat="c in album.copyrights">{{c.text}}</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="ul-uc">UPC</td><td>{{album.external_ids.upc}}</td>
+		</table>
+	</div>
+	<!-- PLAYLIST -->
+	<div ng-if="playlist">
+		<!-- Requires authorization -->
+	</div>
 </div>

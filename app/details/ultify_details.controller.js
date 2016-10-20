@@ -35,14 +35,17 @@ controller('UltifyDetailsController', function($scope, $http, $routeParams, $sce
 					var minutes = Math.floor(ms / 60000);
 					var seconds = ((ms % 60000) / 1000).toFixed(0);
 					return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-				}($scope.result.duration_ms);
+				}($scope.track.duration_ms);
 				break;
 			case 'artist':
 				$scope.artist = response.data;
 				break;
 			case 'album':
+				$scope.album = response.data;
 				break;
 			case 'playlist':
+				// Requires authorization
+				$scope.playlist = response.data;;
 				break;
 			default:
 				break;

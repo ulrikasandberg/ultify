@@ -38,14 +38,17 @@ SOFTWARE.
 				<th>&nbsp;</th>
 				<th class="ul-uc">{{colNameArr[0]}}</th>
 				<th class="ul-uc">{{colNameArr[1]}}</th>
-				<th class="ul-uc">{{colNameArr[2]}}</th>
+				<th class="ul-uc" ng-if="type != 'album'">{{colNameArr[2]}}</th>
 				<th class="ul-uc">{{colNameArr[3]}}</th>
 			</tr>
 			<tr ng-repeat="x in res" ng-class-odd="'odd-row'">
 				<td><img style="height:40px" src="{{x.img}}" alt="" /></td>
-				<td><a ng-href="#/details/{{type}}?url={{x.b64href}}">{{x.name}}</a></td>
+				<td ng-switch="type">
+					<span ng-switch-when="playlist">{{x.name}}</span>
+					<span ng-switch-default><a ng-href="#/details/{{type}}?url={{x.b64href}}">{{x.name}}</a></span>
+				</td>
 				<td>{{x.col3}}</td>
-				<td>{{x.col4}}</td>
+				<td ng-if="type != 'album'">{{x.col4}}</td>
 				<td><a href="{{x.play}}">Spela</a></td>
 			</tr>
 		</table>

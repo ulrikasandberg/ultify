@@ -22,27 +22,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-angular.module('Ultify', [
-	'ngRoute',
-	'UltifySearch',
-	'UltifyDetails'
-]).
-config(function ($routeProvider) {
-	$routeProvider.when('/', {
-			templateUrl: 'app/search/ultify_search.template.html'
-		}).when('/details/:type', {
-			templateUrl: 'app/details/ultify_details.template.html'
-		}).otherwise({
-			redirectTo: '/'
-		});
-}).
-directive('backButton', ['$window', function($window) {
-	return {
-		restrict: 'A',
-		link: function (scope, elem, attrs) {
-			elem.bind('click', function () {
-				$window.history.back();
-			});
-		}
-	};
-}]);
+angular.
+module('UltifyDetails', []);

@@ -1,0 +1,131 @@
+<!--
+MIT License
+
+Copyright (c) 2016 Ulrika Sandberg
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<div id="details-view" ng-app="UltifyDetails" ng-controller="UltifyDetailsController">
+	<p><a href back-button>&lt;&lt; Tillbaka</a></p>
+	<!-- TRACK -->
+	<div ng-if="track">
+		<div class="details-image">
+			<img src="{{track.album.images[0].url}}" alt="">
+		</div>
+		<p class="details-explicit ul-uc" ng-if="track.explicit">Explicit</p>
+		<p><span class="ul-uc">{{track.type}}</span><br><span class="details-title">{{track.name}}</span></p>
+		<p class="details-album"><span class="ul-uc">Album</span><br><a href="">{{track.album.name}}</a></p>
+		
+		<div class="details-artists"><span class="ul-uc">{{(track.artists.length > 1) ? 'Artister' : 'Artist'}}</span>
+			<ul>
+				<li ng-repeat="artist in track.artists"><a href="">{{artist.name}}</a></li>
+			</ul>
+		</div>
+		<div>
+			<span class="ul-uc">Lyssna (30 sekunder)</span><br>
+			<span id="preview-play" ng-click="playPreview()"><img src="resources/icons/preview_play.png" alt="Spela"></span>
+			<iframe id="preview-frame" ng-src="{{frameUrl}}" width="250" height="40" class="ul-hidden"></iframe>
+		</div>
+		<p><a class="ul-uc" ng-href="{{track.external_urls.spotify}}" target="_blank">Öppna hos Spotify &gt;&gt;</a></p>
+		<table>
+			<tr>
+				<td class="ul-uc">Längd</td><td>{{duration}}</td>
+			</tr>
+			<tr>
+				<td class="ul-uc">Spårnummer</td><td>{{track.track_number}}</td>
+			</tr>
+			<tr>
+				<td class="ul-uc">Populäritet</td><td>{{track.popularity}}</td>
+			</tr>
+			<tr>
+				<td class="ul-uc">ISRC</td><td>{{track.external_ids.isrc}}</td>
+			</tr>
+		</table>
+	</div>
+	<!-- ARTIST -->
+	<div ng-if="artist">
+		<div class="details-image">
+			<img src="{{artist.images[0].url}}" alt="">
+		</div>
+		<p><span class="ul-uc">{{artist.type}}</span><br><span class="details-title">{{artist.name}}</span><p>
+		<p><a class="ul-uc" ng-href="{{artist.external_urls.spotify}}" target="_blank">Öppna hos Spotify &gt;&gt;</a></p>
+		<table>
+			<tr>
+				<td class="ul-uc">Följare</td><td>{{artist.followers.total}}</td>
+			</tr>
+			<tr>
+				<td class="ul-uc">Populäritet</td><td>{{artist.popularity}}</td>
+			</tr>
+			<tr>
+				<td class="ul-uc">Genrer</td>
+				<td>
+					<ul class="genre-list">
+						<li ng-repeat="g in artist.genres">{{g}}</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!-- ALBUM -->
+	<div ng-if="album">
+		<div class="details-image">
+			<img src="{{album.images[0].url}}" alt="">
+		</div>
+		<p><span class="ul-uc">{{album.album_type}}</span><br><span class="details-title">{{album.name}}</span><p>
+		<div class="details-artists"><span class="ul-uc">{{(album.artists.length > 1) ? 'Artister' : 'Artist'}}</span>
+			<ul>
+				<li ng-repeat="artist in album.artists"><a href="">{{artist.name}}</a></li>
+			</ul>
+		</div>
+		<p><a class="ul-uc" ng-href="{{album.external_urls.spotify}}" target="_blank">Öppna hos Spotify &gt;&gt;</a></p>
+		<table>
+			<tr>
+				<td class="ul-uc">Utgivningsdatum</td><td>{{album.release_date}}</td>
+			</tr>
+			<tr>
+				<td class="ul-uc">Utgivare</td><td>{{album.label}}</td>
+			</tr>
+			<tr>
+				<td class="ul-uc">Populäritet</td><td>{{album.popularity}}</td>
+			</tr>
+			<tr ng-if="album.genres.length > 0">
+				<td class="ul-uc">Genrer</td>
+				<td>
+					<ul class="genre-list">
+						<li ng-repeat="g in album.genres">{{g}}</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="ul-uc">Copyrights</td>
+				<td>
+					<ul class="genre-list">
+						<li ng-repeat="c in album.copyrights">{{c.text}}</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="ul-uc">UPC</td><td>{{album.external_ids.upc}}</td>
+		</table>
+	</div>
+	<!-- PLAYLIST -->
+	<div ng-if="playlist">
+		<!-- Requires authorization -->
+	</div>
+</div>

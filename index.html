@@ -25,13 +25,17 @@ SOFTWARE.
 <html ng-app="Ultify">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="author" content="Ulrika Sandberg">
 		<title>Ultify</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
 		<script src="app/app.js"></script>
 		<script src="app/util/url_manager.js"></script>
 		<script src="app/search/ultify_search.module.js"></script>
 		<script src="app/search/ultify_search.controller.js"></script>
+		<script src="app/details/ultify_details.module.js"></script>
+		<script src="app/details/ultify_details.controller.js"></script>
 		<link rel="stylesheet" type="text/css" href="app/app.css">
 	</head>
 	<body>
@@ -39,45 +43,7 @@ SOFTWARE.
 			<div id="header">
 				<h1>Ultify</h1>
 			</div>
-			<!-- SEARCH -->
-			<div id="search-area" ng-app="UltifySearch" ng-controller="UltifySearchController">
-				<form class="search-box" name="search-form">
-					<input type="text" name="search" ng-model="query" placeholder="Sök...">
-					<button class="search-button" ng-click="search()">Sök</button><br>
-					<div class="radio-group">
-						<label><input type="radio" name="type" ng-model="type" value="track"> Spår</label>
-						<label><input type="radio" name="type" ng-model="type" value="artist"> Artist</label>
-						<label><input type="radio" name="type" ng-model="type" value="album"> Album</label>
-						<label><input type="radio" name="type" ng-model="type" value="playlist"> Spellista</label>
-					</div>
-				</form>
-				<div ng-show="res">
-					<table class="search-table">
-						<tr>
-							<th>&nbsp;</th>
-							<th>{{colNameArr[0]}}</th>
-							<th>{{colNameArr[1]}}</th>
-							<th>{{colNameArr[2]}}</th>
-							<th>{{colNameArr[3]}}</th>
-						</tr>
-						<tr ng-repeat="x in res" ng-class-odd="'odd-row'">
-							<td><img style="height:40px" src="{{x.img}}" alt="" /></td>
-							<td>{{x.name}}</td>
-							<td>{{x.col3}}</td>
-							<td>{{x.col4}}</td>
-							<td><a href="{{x.play}}">Spela</a></td>
-						</tr>
-					</table>
-					<table class="paginator">
-						<tr>
-							<td><span>Visar {{offset+1}} till {{(offset + limit <= total) ? offset + limit : total}} av {{total}}</span></td>
-							<td><button class="paginator-button" ng-disabled="!previous" ng-click="stepPrev()">Föregående</button></td>
-							<td><button class="paginator-button" ng-disabled="!next" ng-click="stepNext()">Nästa</button></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-			<!-- END SEARCH -->
+			<div id="view-area" ng-view></div>
 		</div>
 		<footer>
 		&copy; Ulrika Sandberg

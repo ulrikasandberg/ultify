@@ -32,6 +32,9 @@ SOFTWARE.
 			<label class="ul-uc"><input type="radio" name="type" ng-model="type" value="playlist"> Spellista</label>
 		</div>
 	</form>
+	<div ng-show="!res">
+		<p class="start-view">Sök efter låtar, artister, album och spellistor på Spotify via Spotify Web API.</p>
+	</div>
 	<div ng-show="res">
 		<table class="search-table">
 			<tr>
@@ -49,7 +52,7 @@ SOFTWARE.
 				</td>
 				<td>{{x.col3}}</td>
 				<td ng-if="type != 'album'">{{x.col4}}</td>
-				<td><a href="{{x.play}}">Spela</a></td>
+				<td><a href="{{x.play}}" target="_blank">Öppna</a></td>
 			</tr>
 		</table>
 		<table class="paginator">

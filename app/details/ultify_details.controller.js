@@ -28,9 +28,15 @@ controller('UltifyDetailsController', function($scope, $http, $routeParams, $sce
 	 $scope.frameUrl = '';
 	 
 	 var showDetails = function(response) {
+	 	var i;
+	 
 	 	switch($routeParams.type) {
 			case 'track':
 				$scope.track = response.data;
+				for(i = 0; i < $scope.track.artists.length; i++) {
+					$scope.track.artists[i].b64href = btoa($scope.track.artists[i].href);
+				}
+				$scope.track.album.b64href = btoa($scope.track.album.href);
 				$scope.duration = function(ms) {
 					var minutes = Math.floor(ms / 60000);
 					var seconds = ((ms % 60000) / 1000).toFixed(0);
@@ -42,6 +48,9 @@ controller('UltifyDetailsController', function($scope, $http, $routeParams, $sce
 				break;
 			case 'album':
 				$scope.album = response.data;
+				for(i = 0; i < $scope.album.artists.length; i++) {
+					$scope.album.artists[i].b64href = btoa($scope.album.artists[i].href);
+				}
 				break;
 			case 'playlist':
 				// Requires authorization

@@ -40,7 +40,7 @@ controller('UltifySearchController', function ($scope, $http, UrlManager, $compi
 				$scope.previous = response.data.tracks.previous;
 				$scope.limit = response.data.tracks.limit;
 				$scope.offset = response.data.tracks.offset;
-				$scope.colNameArr = ['Namn','Album','Artist(er)','Spela'];
+				$scope.colNameArr = ['Namn','Album','Artist(er)','Gå till Spotify'];
 	
 				if(items) {
 					for(i = 0; i < items.length; i++) {
@@ -65,7 +65,7 @@ controller('UltifySearchController', function ($scope, $http, UrlManager, $compi
 				$scope.previous = response.data.artists.previous;
 				$scope.limit = response.data.artists.limit;
 				$scope.offset = response.data.artists.offset;
-				$scope.colNameArr = ['Namn','Följare','Genres','Spela'];
+				$scope.colNameArr = ['Namn','Följare','Genres','Gå till Spotify'];
 	
 				if(items) {
 					for(i = 0; i < items.length; i++) {
@@ -89,7 +89,7 @@ controller('UltifySearchController', function ($scope, $http, UrlManager, $compi
 				$scope.previous = response.data.albums.previous;
 				$scope.limit = response.data.albums.limit;
 				$scope.offset = response.data.albums.offset;
-				$scope.colNameArr = ['Namn','Typ', '', 'Spela'];
+				$scope.colNameArr = ['Namn','Typ', '', 'Gå till Spotify'];
 	
 				if(items) {
 					for(i = 0; i < items.length; i++) {
@@ -112,7 +112,7 @@ controller('UltifySearchController', function ($scope, $http, UrlManager, $compi
 				$scope.previous = response.data.playlists.previous;
 				$scope.limit = response.data.playlists.limit;
 				$scope.offset = response.data.playlists.offset;
-				$scope.colNameArr = ['Namn','Ägare','Antal spår','Spela'];
+				$scope.colNameArr = ['Namn','Ägare','Antal spår','Gå till Spotify'];
 	
 				if(items) {
 					for(i = 0; i < items.length; i++) {

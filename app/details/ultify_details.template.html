@@ -30,11 +30,11 @@ SOFTWARE.
 		</div>
 		<p class="details-explicit ul-uc" ng-if="track.explicit">Explicit</p>
 		<p><span class="ul-uc">{{track.type}}</span><br><span class="details-title">{{track.name}}</span></p>
-		<p class="details-album"><span class="ul-uc">Album</span><br><a href="">{{track.album.name}}</a></p>
+		<p class="details-album"><span class="ul-uc">Album</span><br><a ng-href="#/details/album?url={{track.album.b64href}}">{{track.album.name}}</a></p>
 		
 		<div class="details-artists"><span class="ul-uc">{{(track.artists.length > 1) ? 'Artister' : 'Artist'}}</span>
 			<ul>
-				<li ng-repeat="artist in track.artists"><a href="">{{artist.name}}</a></li>
+				<li ng-repeat="artist in track.artists"><a ng-href="#/details/artist?url={{artist.b64href}}">{{artist.name}}</a></li>
 			</ul>
 		</div>
 		<div>
@@ -90,7 +90,7 @@ SOFTWARE.
 		<p><span class="ul-uc">{{album.album_type}}</span><br><span class="details-title">{{album.name}}</span><p>
 		<div class="details-artists"><span class="ul-uc">{{(album.artists.length > 1) ? 'Artister' : 'Artist'}}</span>
 			<ul>
-				<li ng-repeat="artist in album.artists"><a href="">{{artist.name}}</a></li>
+				<li ng-repeat="artist in album.artists"><a href="#/details/artist?url={{artist.b64href}}">{{artist.name}}</a></li>
 			</ul>
 		</div>
 		<p><a class="ul-uc" ng-href="{{album.external_urls.spotify}}" target="_blank">Öppna hos Spotify &gt;&gt;</a></p>

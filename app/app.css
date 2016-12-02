@@ -98,6 +98,13 @@ div#search-area, div#details-view {
 
 /* SEARCH */
 
+.start-view {
+	font-size: 2.5em;
+	font-weight: 300;
+	padding: 80px 100px;
+	text-align: center;
+}
+
 .search-box {
 	margin: 8px 0;
 }
@@ -223,4 +230,35 @@ div.details-artists ul li {
 	border: none;
 	position: relative;
 	left: -38px;	
+}
+
+@media screen and (max-width: 880px) {
+	.start-view {
+		padding: 40px 50px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.start-view {
+		font-size: 2em;
+	}
+	
+	.search-box input[type=text] {
+    	width: 330px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.start-view {
+		font-size: 1.5em;
+		padding: 10px 0px;
+	}
+	
+	div.radio-group label {
+		margin-right: 8px;
+	}
+	
+	.search-box input[type=text] {
+    	width: 250px;
+	}
 }
